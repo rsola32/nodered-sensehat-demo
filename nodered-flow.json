@@ -1,0 +1,354 @@
+[
+    {
+        "id": "d17601e63308f809",
+        "type": "tab",
+        "label": "Flow 3",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "052f9a49eb9d3e99",
+        "type": "rpi-sensehatsim in",
+        "z": "d17601e63308f809",
+        "name": "",
+        "motion": false,
+        "env": true,
+        "stick": true,
+        "x": 120,
+        "y": 80,
+        "wires": [
+            [
+                "8834234a199b9acc"
+            ]
+        ]
+    },
+    {
+        "id": "ebe4048d9a82acf8",
+        "type": "debug",
+        "z": "d17601e63308f809",
+        "name": "debug 2",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 740,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "5cc03dc1ead2023c",
+        "type": "ui_gauge",
+        "z": "d17601e63308f809",
+        "name": "",
+        "group": "20cb78e8f23feb74",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "Temperature",
+        "label": "units",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 750,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "a2de7da22d7546e9",
+        "type": "change",
+        "z": "d17601e63308f809",
+        "name": "Humidity",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.humidity",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 500,
+        "y": 140,
+        "wires": [
+            [
+                "f672c922bace26b0"
+            ]
+        ]
+    },
+    {
+        "id": "354813e321fd0973",
+        "type": "change",
+        "z": "d17601e63308f809",
+        "name": "Pressure",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.pressure",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 500,
+        "y": 200,
+        "wires": [
+            [
+                "ebe4048d9a82acf8",
+                "2b9abd71150774f0"
+            ]
+        ]
+    },
+    {
+        "id": "f672c922bace26b0",
+        "type": "ui_gauge",
+        "z": "d17601e63308f809",
+        "name": "",
+        "group": "69fdc0fc91c5e2bf",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "Humidity",
+        "label": "units",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 740,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "0bdf61079289ad20",
+        "type": "mqtt out",
+        "z": "d17601e63308f809",
+        "name": "ThingsBoard",
+        "topic": "v1/devices/me/telemetry",
+        "qos": "1",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "e0f81ece2531be7a",
+        "x": 450,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "8834234a199b9acc",
+        "type": "trigger",
+        "z": "d17601e63308f809",
+        "name": "10s Sampling",
+        "op1": "",
+        "op2": "",
+        "op1type": "nul",
+        "op2type": "payl",
+        "duration": "10",
+        "extend": false,
+        "overrideDelay": false,
+        "units": "s",
+        "reset": "",
+        "bytopic": "all",
+        "topic": "topic",
+        "outputs": 1,
+        "x": 300,
+        "y": 80,
+        "wires": [
+            [
+                "a2de7da22d7546e9",
+                "354813e321fd0973",
+                "0bdf61079289ad20",
+                "c7a4df5092556b77"
+            ]
+        ]
+    },
+    {
+        "id": "80972bc18a0646ae",
+        "type": "change",
+        "z": "d17601e63308f809",
+        "name": "Humidity",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.humidity",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 500,
+        "y": 140,
+        "wires": [
+            [
+                "ebe4048d9a82acf8"
+            ]
+        ]
+    },
+    {
+        "id": "c7a4df5092556b77",
+        "type": "change",
+        "z": "d17601e63308f809",
+        "name": "Temperature",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.temperature",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 510,
+        "y": 80,
+        "wires": [
+            [
+                "ebe4048d9a82acf8",
+                "5cc03dc1ead2023c"
+            ]
+        ]
+    },
+    {
+        "id": "2b9abd71150774f0",
+        "type": "ui_gauge",
+        "z": "d17601e63308f809",
+        "name": "",
+        "group": "ed8869cbaf1a4416",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "Pressure",
+        "label": "units",
+        "format": "{{value}}",
+        "min": "260",
+        "max": "1020",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 740,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "20cb78e8f23feb74",
+        "type": "ui_group",
+        "name": "Temperature",
+        "tab": "64e24f2e47efee4d",
+        "order": 2,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "69fdc0fc91c5e2bf",
+        "type": "ui_group",
+        "name": "Humidity",
+        "tab": "64e24f2e47efee4d",
+        "order": 3,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "e0f81ece2531be7a",
+        "type": "mqtt-broker",
+        "name": "",
+        "broker": "demo.thingsboard.io",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthRetain": "false",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closeRetain": "false",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willRetain": "false",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "ed8869cbaf1a4416",
+        "type": "ui_group",
+        "name": "Pressure",
+        "tab": "64e24f2e47efee4d",
+        "order": 3,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "64e24f2e47efee4d",
+        "type": "ui_tab",
+        "name": "Home",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    }
+]
